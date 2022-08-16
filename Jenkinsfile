@@ -17,12 +17,4 @@ pipeline{
             }
         }
     }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-    }
 }
