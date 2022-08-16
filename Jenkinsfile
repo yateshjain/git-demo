@@ -1,9 +1,19 @@
 pipeline{
     agent any
     stages{
-        stage("A"){
+        stage("Sonarqube Quality check"){
+            agent{
+                docker{
+                    image 'openjdk:11'
+                }
+            }
             steps{
-                echo "========executing A========"
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonartoken') {
+                        sh 'chmod +x gradlew'
+                        sh './gradlew sonarqube'
+                    }
+                }
             }
         }
     }
@@ -13,9 +23,6 @@ pipeline{
         }
         success{
             echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
