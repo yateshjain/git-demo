@@ -11,7 +11,6 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonartoken') {
                         sh 'chmod +x gradlew'
-			sh 'gradlew --stop'
                         sh 'sh -x gradlew sonarqube'
                     }
                 }
